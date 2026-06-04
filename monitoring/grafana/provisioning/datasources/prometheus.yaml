@@ -1,0 +1,26 @@
+apiVersion: 1
+datasources:
+  - name: Jaeger
+    type: jaeger
+    access: proxy
+    url: http://jaeger:16686
+    editable: true
+    uid: jaeger_datasource
+    jsonData:
+      nodeGraph:
+        enabled: true
+
+  - name: Prometheus
+    type: prometheus
+    access: proxy
+    url: http://prometheus:9090
+    isDefault: true
+    editable: true
+    jsonData:
+      exemplarTraceIdDestinations:
+        - name: trace_id
+          datasourceUid: jaeger_datasource
+          urlDisplayLabel: "🔍 Buka di Jaeger"
+        - name: trace_id
+          url: "http://localhost:16686/trace/$${__value.raw}"
+          urlDisplayLabel: "↗ Langsung ke Jaeger UI"

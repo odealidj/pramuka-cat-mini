@@ -1,0 +1,97 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import "tailwindcss";
+
+@theme inline {
+  /* Pramuka Color Palette */
+  --color-pramuka-900: #3B1F0A;
+  --color-pramuka-800: #5C3010;
+  --color-pramuka-700: #7C4318;
+  --color-pramuka-600: #9C5A22;
+  --color-pramuka-500: #B8722E;
+  --color-pramuka-400: #D4924A;
+  --color-pramuka-300: #E8B478;
+  --color-pramuka-200: #F2D4B0;
+  --color-pramuka-100: #FAF0E6;
+  --color-pramuka-50:  #FFF8F2;
+
+  /* Accent - Emas (Gold) */
+  --color-gold-500: #C9A84C;
+  --color-gold-400: #D4B96A;
+  --color-gold-300: #E3CE95;
+
+  /* Font */
+  --font-sans: 'Inter', system-ui, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  min-height: 100%;
+  font-family: 'Inter', system-ui, sans-serif;
+  background-color: #F9FAFB;
+  color: #111827;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F3F4F6;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #9C5A22;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #7C4318;
+}
+
+/* Sidebar active link glow */
+.sidebar-link-active {
+  background: linear-gradient(135deg, #7C4318 0%, #9C5A22 100%);
+  box-shadow: 0 4px 12px rgba(124, 67, 24, 0.35);
+}
+
+/* Card hover lift */
+.card-lift {
+  transition: transform 200ms ease, box-shadow 200ms ease;
+}
+
+.card-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+}
+
+/* Premium Table Styles */
+.table-header-premium {
+  @apply bg-gradient-to-r from-[#5C3010] to-[#7C4318] border-b border-[#4A2B18];
+}
+
+.table-header-cell-premium {
+  @apply px-5 py-4 text-left text-xs font-bold text-white uppercase tracking-wider;
+}
+
+.table-row-premium {
+  @apply hover:bg-[#FAF7F2] transition-colors border-b border-gray-50 last:border-0;
+}
+
+.table-cell-premium {
+  @apply px-5 py-4 align-top;
+}
+
+.table-badge-premium {
+  @apply text-[#7A4520] text-sm font-bold bg-[#FAF7F2] px-2.5 py-1 rounded-lg border border-[#E8DCC8];
+}

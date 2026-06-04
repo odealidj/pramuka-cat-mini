@@ -1,0 +1,119 @@
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: pramukacat_postgres
+    environment:
+      POSTGRES_USER: POSTGRES_USER
+      POSTGRES_PASSWORD: POSTGRES_PASSWORD
+      POSTGRES_DB: pramukacat
+    ports:
+      - "5432:5432"
+    volumes:
+      - pramukacat_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U POSTGRES_USER -d pramukacat"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: pramukacat_redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - pramukacat_redisdata:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  migrate:
+    image: migrate/migrate
+    container_name: pramukacat_migrate
+    volumes:
+      - ./backend/sql/migrations:/migrations
+    command:
+      - -path=/migrations
+      - -database=postgres://POSTGRES_USER:POSTGRES_PASSWORD@postgres:5432/pramukacat?sslmode=disable
+      - up
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  api:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: pramukacat_api
+    ports:
+      - "8080:8080"
+    environment:
+      - PORT=8080
+      - APP_ENV=production
+      # PostgreSQL — harus sesuai dengan pkg/database/postgres.go
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_USER=POSTGRES_USER
+      - DB_PASSWORD=POSTGRES_PASSWORD
+      - DB_NAME=pramukacat
+      - DB_SSLMODE=disable
+      # Redis — harus sesuai dengan pkg/database/redis.go
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - REDIS_PASSWORD=
+      - REDIS_DB=0
+      # JWT Secrets
+      - JWT_ACCESS_SECRET=supersecretaccess
+      - JWT_REFRESH_SECRET=supersecretrefresh
+      # OpenTelemetry — kirim trace ke Jaeger
+      - OTEL_EXPORTER_OTLP_ENDPOINT=jaeger:4317
+    depends_on:
+      postgres:
+        condition: service_healthy
+      migrate:
+        condition: service_completed_successfully
+      redis:
+        condition: service_healthy
+      jaeger:
+        condition: service_started
+
+  jaeger:
+    image: jaegertracing/all-in-one:latest
+    container_name: pramukacat_jaeger
+    environment:
+      - COLLECTOR_OTLP_ENABLED=true
+    ports:
+      - "16686:16686"  # Jaeger UI
+      - "4317:4317"    # OTLP gRPC (tempat Go app mengirim trace)
+      - "4318:4318"    # OTLP HTTP (alternatif)
+
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: pramukacat_prometheus
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+      - "--enable-feature=exemplar-storage"
+      - "--web.enable-remote-write-receiver"
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./monitoring/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: pramukacat_grafana
+    ports:
+      - "3030:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    volumes:
+      - ./monitoring/grafana/provisioning:/etc/grafana/provisioning
+      - ./monitoring/grafana/dashboards:/var/lib/grafana/dashboards
+    depends_on:
+      - prometheus
+
+volumes:
+  pramukacat_pgdata:
+  pramukacat_redisdata:

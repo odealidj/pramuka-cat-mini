@@ -1,0 +1,2 @@
+ALTER TABLE questions DROP COLUMN IF EXISTS deleted_at;
+ALTER TABLE events DROP COLUMN IF EXISTS deleted_at;

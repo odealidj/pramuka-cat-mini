@@ -1,0 +1,8 @@
+DROP TABLE IF EXISTS user_answers;
+DROP TABLE IF EXISTS user_event_approvals;
+DROP TABLE IF EXISTS event_questions;
+DROP TABLE IF EXISTS events;
+DROP TABLE IF EXISTS questions;
+DROP TABLE IF EXISTS categories;
+DROP TABLE IF EXISTS users;
+DROP EXTENSION IF EXISTS "uuid-ossp";

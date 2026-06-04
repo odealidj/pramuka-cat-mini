@@ -1,0 +1,61 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# OS metadata
+.DS_Store
+Thumbs.db
+
+# Node
+node_modules/
+dist/
+build/
+.next/
+out/
+
+# Go
+backend/api
+backend/pramuka-cat
+backend/tmp/
+
+# Env files (GitGuardian Protection)
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.cert
+*.crt
+*.p12
+*.pfx
+*.jks
+*.keystore
+
+# Coverage
+coverage/
+*.out
+
+# IDEs and Editors
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Docker
+.docker/
+docker-compose.override.yml
+
+# Docs
+branch-sequence.md
+HANDOFF.md
+soal_invalid_100.xlsx
+soal_valid_500.xlsx
+test.go
+
+# Abaikan folder dokumentasi internal
+docs/
