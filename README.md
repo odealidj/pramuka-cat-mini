@@ -4,9 +4,13 @@
 [![Next.js](https://img.shields.io/badge/Next.js-14-000000?logo=nextdotjs&logoColor=white)](https://nextjs.org/)
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-4169E1?logo=postgresql&logoColor=white)](https://www.postgresql.org/)
 [![Redis](https://img.shields.io/badge/Redis-Cache%20%7C%20Broker-DC382D?logo=redis&logoColor=white)](https://redis.io/)
-[![License](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
+[![License](https://img.shields.io/badge/License-Proprietary%20(Non--Commercial)-red.svg)](#)
 
 > Platform ujian berbasis komputer (CAT) untuk kegiatan kepramukaan yang dirancang *highly concurrent* dan tangguh. Dibangun dengan **Go + Echo**, **PostgreSQL**, dan **Redis**.
+
+> [!WARNING]  
+> **Repository ini disediakan khusus untuk keperluan portofolio (Showcase) dan rekrutmen.**  
+> Penggunaan *source code* ini untuk tujuan komersial, dijual ulang, atau di-*deploy* ke ranah produksi tanpa izin tertulis secara eksplisit dari pembuat adalah **sangat dilarang (Hak Cipta Dilindungi).**
 
 ---
 
