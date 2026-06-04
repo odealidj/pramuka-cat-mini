@@ -9,7 +9,7 @@
 > Platform ujian berbasis komputer (CAT) untuk kegiatan kepramukaan yang dirancang *highly concurrent* dan tangguh. Dibangun dengan **Go + Echo**, **PostgreSQL**, dan **Redis**.
 
 > [!WARNING]  
-> Penggunaan *source code* ini untuk tujuan komersial, dijual ulang, atau di-*deploy* ke ranah produksi tanpa izin tertulis secara eksplisit dari pembuat adalah **sangat dilarang (Hak Cipta Dilindungi).**
+> **Tidak untuk komersial.**
 
 ---
 
