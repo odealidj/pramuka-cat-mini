@@ -57,4 +57,9 @@ soal_invalid_100.xlsx
 soal_valid_500.xlsx
 test.go
 
-# Abaikan folder dokumentasi internal
+# Abaikan dokumen desain internal agar tidak ikut di-commit
+docs/Pramuka_CAT_PRD.md
+docs/database-erd.md
+docs/implementation-decisions.md
+docs/sequence-diagrams.md
+docs/GAP_ANALYSIS.md
