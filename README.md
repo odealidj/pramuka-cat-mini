@@ -126,15 +126,36 @@ cp backend/.env.example backend/.env   # Sesuaikan isinya
 # 2. Jalankan seluruh sistem (Infra + API)
 make up
 
-# 3. Isi data simulasi (opsional)
+# 3. Isi data simulasi
 make seed
 ```
-
-> **Login default:** Admin `admin_pramuka / admin123` · Peserta `peserta1 / peserta123`
 
 API tersedia di: `http://localhost:8080` · Health check: `http://localhost:8080/health`
 
 ---
+
+## 🧪 Simulasi Ujian (Dummy Data Seeder)
+
+Jika Anda ingin langsung mencoba aplikasi tanpa perlu menginput data soal dari awal, Anda dapat menjalankan perintah *seeder* kami yang berisi data **Pramuka Realistis**:
+
+```bash
+make seed
+```
+*(Catatan: Jika sewaktu-waktu Anda ingin mengembalikan database ke kondisi bersih dan mengisinya ulang, gunakan perintah `make reset-db`)*
+
+**Data apa saja yang otomatis terbuat?**
+1. **Akun Pengguna:**
+   - Super Admin: `superadmin` / `superadmin123`
+   - Admin Kwartir: `admin_pramuka` / `admin123`
+   - Peserta: `peserta1` hingga `peserta5` (semua *password*: `peserta123`)
+2. **Bank Soal & Kategori:**
+   - Terdapat **10 soal valid** ber-tema Pramuka sungguhan (terbagi dalam kategori: Pengetahuan Umum Kepramukaan, Sandi dan Morse, Sejarah Kepramukaan).
+3. **Event Ujian:**
+   - Akan otomatis dibuat jadwal "Tryout Pramuka Garuda 2026 - Kwartir Nasional" yang sedang berstatus *LIVE*.
+   - Peserta 1 hingga 3 akan otomatis terdaftar dan di-*approve*.
+   - Simulasi data jawaban (*dummy answers*) otomatis dimasukkan seolah-olah peserta sedang mengerjakan ujian.
+
+Anda bisa langsung *login* sebagai **Admin** untuk melihat *Dashboard Statistik*, atau *login* sebagai **Peserta** (`peserta1`) untuk mencoba sensasi menjawab soal-soal kepramukaan!
 
 ## Perintah Make
 
