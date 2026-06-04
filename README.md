@@ -1,6 +1,20 @@
 # Pramuka CAT
 
-Platform ujian berbasis komputer (CAT) untuk kegiatan kepramukaan. Dibangun dengan **Go + Echo**, **PostgreSQL**, dan **Redis**.
+[![Go Version](https://img.shields.io/badge/Go-1.22-00ADD8?logo=go&logoColor=white)](https://golang.org/)
+[![Next.js](https://img.shields.io/badge/Next.js-14-000000?logo=nextdotjs&logoColor=white)](https://nextjs.org/)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-4169E1?logo=postgresql&logoColor=white)](https://www.postgresql.org/)
+[![Redis](https://img.shields.io/badge/Redis-Cache%20%7C%20Broker-DC382D?logo=redis&logoColor=white)](https://redis.io/)
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
+
+> Platform ujian berbasis komputer (CAT) untuk kegiatan kepramukaan yang dirancang *highly concurrent* dan tangguh. Dibangun dengan **Go + Echo**, **PostgreSQL**, dan **Redis**.
+
+---
+
+<p align="center">
+  <img src="https://via.placeholder.com/800x450/111827/ffffff?text=Dashboard+Admin+Screenshot+(Placeholder)" alt="Admin Dashboard" width="48%">
+  &nbsp;
+  <img src="https://via.placeholder.com/800x450/111827/ffffff?text=Ujian+Peserta+Screenshot+(Placeholder)" alt="Peserta View" width="48%">
+</p>
 
 ---
 
@@ -138,7 +152,15 @@ API tersedia di: `http://localhost:8080` · Health check: `http://localhost:8080
 
 ---
 
+## 📚 Dokumentasi API
 
+Untuk memudahkan integrasi dan pemahaman alur data backend, referensi daftar endpoint API yang tersedia dapat dilihat pada dokumen terpisah berikut:
+
+👉 **[Lihat Dokumentasi API (API_REFERENCE.md)](docs/API_REFERENCE.md)**
+
+*Catatan: Jika server lokal dijalankan, dokumentasi interaktif (Swagger UI) juga dapat diakses melalui `http://localhost:8080/swagger/index.html`.*
+
+---
 
 ## 📈 Laporan Pengujian Kinerja (Performance Test Report)
 
