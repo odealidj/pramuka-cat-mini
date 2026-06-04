@@ -11,9 +11,9 @@
 ---
 
 <p align="center">
-  <img src="https://via.placeholder.com/800x450/111827/ffffff?text=Dashboard+Admin+Screenshot+(Placeholder)" alt="Admin Dashboard" width="48%">
+  <img src="./docs/images/admin-dashboard.png" alt="Admin Dashboard" width="48%">
   &nbsp;
-  <img src="https://via.placeholder.com/800x450/111827/ffffff?text=Ujian+Peserta+Screenshot+(Placeholder)" alt="Peserta View" width="48%">
+  <img src="./docs/images/peserta-dashboard.png" alt="Peserta View" width="48%">
 </p>
 
 ---

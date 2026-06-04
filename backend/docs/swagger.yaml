@@ -1,0 +1,1115 @@
+basePath: /api/v1
+definitions:
+  domain.Category:
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+    type: object
+  domain.CreateCategoryRequest:
+    properties:
+      name:
+        type: string
+    required:
+    - name
+    type: object
+  domain.CreateEventRequest:
+    properties:
+      duration_minutes:
+        minimum: 1
+        type: integer
+      end_time:
+        type: string
+      name:
+        type: string
+      passing_grade:
+        maximum: 100
+        minimum: 0
+        type: number
+      start_time:
+        type: string
+    required:
+    - duration_minutes
+    - end_time
+    - name
+    - passing_grade
+    - start_time
+    type: object
+  domain.CreateQuestionRequest:
+    properties:
+      category_id:
+        type: integer
+      correct_answer:
+        enum:
+        - A
+        - B
+        - C
+        - D
+        type: string
+      option_a:
+        type: string
+      option_b:
+        type: string
+      option_c:
+        type: string
+      option_d:
+        type: string
+      question_text:
+        type: string
+      weight:
+        minimum: 1
+        type: integer
+    required:
+    - correct_answer
+    - option_a
+    - option_b
+    - option_c
+    - option_d
+    - question_text
+    - weight
+    type: object
+  domain.CreateUserRequest:
+    properties:
+      full_name:
+        type: string
+      password:
+        minLength: 6
+        type: string
+      photo_url:
+        type: string
+      role:
+        enum:
+        - admin
+        - peserta
+        type: string
+      username:
+        type: string
+    required:
+    - full_name
+    - password
+    - role
+    - username
+    type: object
+  domain.EnrollEventRequest:
+    properties:
+      event_id:
+        type: string
+    required:
+    - event_id
+    type: object
+  domain.Event:
+    properties:
+      created_at:
+        type: string
+      duration_minutes:
+        type: integer
+      end_time:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+      passing_grade:
+        type: number
+      start_time:
+        type: string
+    type: object
+  domain.LoginRequest:
+    properties:
+      password:
+        type: string
+        x-order: "1"
+      username:
+        type: string
+        x-order: "0"
+    required:
+    - password
+    - username
+    type: object
+  domain.LoginResponse:
+    properties:
+      access_token:
+        type: string
+      refresh_token:
+        type: string
+      user:
+        $ref: '#/definitions/domain.UserResponse'
+    type: object
+  domain.Question:
+    properties:
+      category_id:
+        type: integer
+      correct_answer:
+        type: string
+      created_at:
+        type: string
+      id:
+        type: string
+      option_a:
+        type: string
+      option_b:
+        type: string
+      option_c:
+        type: string
+      option_d:
+        type: string
+      question_text:
+        type: string
+      weight:
+        type: integer
+    type: object
+  domain.RefreshRequest:
+    properties:
+      refresh_token:
+        type: string
+    required:
+    - refresh_token
+    type: object
+  domain.RefreshResponse:
+    properties:
+      access_token:
+        type: string
+      refresh_token:
+        type: string
+    type: object
+  domain.UpcomingEvent:
+    properties:
+      duration_minutes:
+        type: integer
+      end_time:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+      passing_grade:
+        type: number
+      start_time:
+        type: string
+    type: object
+  domain.UpdateCategoryRequest:
+    properties:
+      name:
+        type: string
+    required:
+    - name
+    type: object
+  domain.UpdateQuestionRequest:
+    properties:
+      category_id:
+        type: integer
+      correct_answer:
+        enum:
+        - A
+        - B
+        - C
+        - D
+        type: string
+      option_a:
+        type: string
+      option_b:
+        type: string
+      option_c:
+        type: string
+      option_d:
+        type: string
+      question_text:
+        type: string
+      weight:
+        minimum: 1
+        type: integer
+    required:
+    - correct_answer
+    - option_a
+    - option_b
+    - option_c
+    - option_d
+    - question_text
+    - weight
+    type: object
+  domain.UpdateUserPasswordRequest:
+    properties:
+      password:
+        minLength: 6
+        type: string
+    required:
+    - password
+    type: object
+  domain.UpdateUserRequest:
+    properties:
+      full_name:
+        type: string
+      photo_url:
+        type: string
+      role:
+        enum:
+        - admin
+        - peserta
+        type: string
+      username:
+        type: string
+    required:
+    - full_name
+    - role
+    - username
+    type: object
+  domain.User:
+    properties:
+      created_at:
+        type: string
+      full_name:
+        type: string
+      id:
+        type: string
+      photo_url:
+        type: string
+      role:
+        type: string
+      username:
+        type: string
+    type: object
+  domain.UserApproval:
+    properties:
+      approval_id:
+        type: string
+      completed_at:
+        type: string
+      duration_minutes:
+        type: integer
+      end_time:
+        type: string
+      event_id:
+        type: string
+      is_completed:
+        type: boolean
+      is_passed:
+        type: boolean
+      name:
+        type: string
+      passing_grade:
+        type: number
+      score:
+        type: number
+      start_time:
+        type: string
+      started_at:
+        type: string
+      status:
+        description: pending, approved, revoked
+        type: string
+    type: object
+  domain.UserResponse:
+    properties:
+      full_name:
+        type: string
+      id:
+        type: string
+      role:
+        type: string
+      username:
+        type: string
+    type: object
+  response.ErrorDetail:
+    properties:
+      field:
+        type: string
+      message:
+        type: string
+    type: object
+  response.ErrorResponse:
+    properties:
+      code:
+        example: 400
+        type: integer
+      errors:
+        items:
+          $ref: '#/definitions/response.ErrorDetail'
+        type: array
+      message:
+        example: Terjadi kesalahan
+        type: string
+      success:
+        example: false
+        type: boolean
+      timestamp:
+        example: "2026-05-18T02:00:00Z"
+        type: string
+      trace_id:
+        example: ed462bd023ff76e0001482c0e045e906
+        type: string
+    type: object
+  response.Meta:
+    properties:
+      has_next:
+        type: boolean
+      has_prev:
+        type: boolean
+      limit:
+        type: integer
+      page:
+        type: integer
+      total_pages:
+        type: integer
+      total_records:
+        type: integer
+    type: object
+  response.PaginatedResponse:
+    properties:
+      code:
+        example: 200
+        type: integer
+      data: {}
+      message:
+        type: string
+      meta:
+        $ref: '#/definitions/response.Meta'
+      success:
+        example: true
+        type: boolean
+      timestamp:
+        example: "2026-05-18T02:00:00Z"
+        type: string
+      trace_id:
+        example: ed462bd023ff76e0001482c0e045e906
+        type: string
+    type: object
+  response.SuccessResponse:
+    properties:
+      code:
+        example: 200
+        type: integer
+      data: {}
+      message:
+        example: Operasi berhasil
+        type: string
+      success:
+        example: true
+        type: boolean
+      timestamp:
+        example: "2026-05-18T02:00:00Z"
+        type: string
+      trace_id:
+        example: ed462bd023ff76e0001482c0e045e906
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact:
+    name: Dev Team Pramuka CAT
+    url: https://github.com/odealidj/pramuka-CAT
+  description: REST API untuk platform Computer Assisted Test (CAT) Pramuka.
+  termsOfService: http://swagger.io/terms/
+  title: Pramuka CAT API
+  version: "1.0"
+paths:
+  /admin/categories:
+    get:
+      parameters:
+      - default: 1
+        description: Halaman
+        in: query
+        name: page
+        type: integer
+      - default: 10
+        description: Limit
+        in: query
+        name: limit
+        type: integer
+      - description: Cari nama kategori
+        in: query
+        name: search
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/response.PaginatedResponse'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/domain.Category'
+                  type: array
+              type: object
+      security:
+      - BearerAuth: []
+      summary: Daftar Kategori Soal
+      tags:
+      - Admin - Kategori
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Nama Kategori
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/domain.CreateCategoryRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            allOf:
+            - $ref: '#/definitions/response.SuccessResponse'
+            - properties:
+                data:
+                  $ref: '#/definitions/domain.Category'
+              type: object
+      security:
+      - BearerAuth: []
+      summary: Buat Kategori Soal
+      tags:
+      - Admin - Kategori
+  /admin/categories/{id}:
+    delete:
+      parameters:
+      - description: ID Kategori
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.SuccessResponse'
+      security:
+      - BearerAuth: []
+      summary: Hapus Kategori Soal
+      tags:
+      - Admin - Kategori
+    put:
+      consumes:
+      - application/json
+      parameters:
+      - description: ID Kategori
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Nama Baru
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/domain.UpdateCategoryRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/response.SuccessResponse'
+            - properties:
+                data:
+                  $ref: '#/definitions/domain.Category'
+              type: object
+      security:
+      - BearerAuth: []
+      summary: Update Kategori Soal
+      tags:
+      - Admin - Kategori
+  /admin/events:
+    get:
+      parameters:
+      - default: 1
+        description: Halaman
+        in: query
+        name: page
+        type: integer
+      - default: 10
+        description: Limit
+        in: query
+        name: limit
+        type: integer
+      - description: Cari nama event
+        in: query
+        name: search
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/response.PaginatedResponse'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/domain.Event'
+                  type: array
+              type: object
+      security:
+      - BearerAuth: []
+      summary: Daftar Event Ujian
+      tags:
+      - Admin - Event
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Data Event
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/domain.CreateEventRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            allOf:
+            - $ref: '#/definitions/response.SuccessResponse'
+            - properties:
+                data:
+                  $ref: '#/definitions/domain.Event'
+              type: object
+      security:
+      - BearerAuth: []
+      summary: Buat Event Ujian
+      tags:
+      - Admin - Event
+  /admin/events/{id}/export:
+    get:
+      description: Download rekap nilai peserta dalam format Excel (.xlsx) atau PDF
+      parameters:
+      - description: UUID Event
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: 'Format file: excel (default) atau pdf'
+        in: query
+        name: format
+        type: string
+      produces:
+      - application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: file
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Export Laporan Peserta
+      tags:
+      - Admin - Event
+  /admin/questions:
+    get:
+      parameters:
+      - default: 1
+        description: Halaman
+        in: query
+        name: page
+        type: integer
+      - default: 10
+        description: Limit
+        in: query
+        name: limit
+        type: integer
+      - description: Cari teks pertanyaan
+        in: query
+        name: search
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/response.PaginatedResponse'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/domain.Question'
+                  type: array
+              type: object
+      security:
+      - BearerAuth: []
+      summary: Daftar Soal
+      tags:
+      - Admin - Bank Soal
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Data Soal
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/domain.CreateQuestionRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            allOf:
+            - $ref: '#/definitions/response.SuccessResponse'
+            - properties:
+                data:
+                  $ref: '#/definitions/domain.Question'
+              type: object
+      security:
+      - BearerAuth: []
+      summary: Buat Soal Baru
+      tags:
+      - Admin - Bank Soal
+  /admin/questions/{id}:
+    delete:
+      parameters:
+      - description: UUID Soal
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.SuccessResponse'
+      security:
+      - BearerAuth: []
+      summary: Hapus Soal
+      tags:
+      - Admin - Bank Soal
+    get:
+      parameters:
+      - description: UUID Soal
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/response.SuccessResponse'
+            - properties:
+                data:
+                  $ref: '#/definitions/domain.Question'
+              type: object
+      security:
+      - BearerAuth: []
+      summary: Detail Soal
+      tags:
+      - Admin - Bank Soal
+    put:
+      consumes:
+      - application/json
+      parameters:
+      - description: UUID Soal
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Data Soal Baru
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/domain.UpdateQuestionRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/response.SuccessResponse'
+            - properties:
+                data:
+                  $ref: '#/definitions/domain.Question'
+              type: object
+      security:
+      - BearerAuth: []
+      summary: Update Soal
+      tags:
+      - Admin - Bank Soal
+  /admin/users:
+    get:
+      description: Mengambil daftar seluruh pengguna dengan paginasi
+      parameters:
+      - default: 1
+        description: 'Halaman (default: 1)'
+        in: query
+        name: page
+        type: integer
+      - default: 10
+        description: 'Jumlah per halaman (default: 10)'
+        in: query
+        name: limit
+        type: integer
+      - description: Cari nama pengguna
+        in: query
+        name: search
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/response.PaginatedResponse'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/domain.User'
+                  type: array
+              type: object
+      security:
+      - BearerAuth: []
+      summary: Daftar Semua User
+      tags:
+      - Admin - User
+    post:
+      consumes:
+      - application/json
+      description: Admin membuat akun peserta atau admin baru
+      parameters:
+      - description: Data User Baru
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/domain.CreateUserRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            allOf:
+            - $ref: '#/definitions/response.SuccessResponse'
+            - properties:
+                data:
+                  $ref: '#/definitions/domain.User'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Buat User Baru
+      tags:
+      - Admin - User
+  /admin/users/{id}:
+    delete:
+      description: Admin menonaktifkan akun pengguna (data tidak benar-benar dihapus)
+      parameters:
+      - description: UUID User
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.SuccessResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Hapus User (Soft-Delete)
+      tags:
+      - Admin - User
+    get:
+      description: Mengambil data detail satu pengguna berdasarkan ID
+      parameters:
+      - description: UUID User
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/response.SuccessResponse'
+            - properties:
+                data:
+                  $ref: '#/definitions/domain.User'
+              type: object
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Detail User
+      tags:
+      - Admin - User
+    put:
+      consumes:
+      - application/json
+      description: Admin memperbarui data profil pengguna
+      parameters:
+      - description: UUID User
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Data yang diperbarui
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/domain.UpdateUserRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/response.SuccessResponse'
+            - properties:
+                data:
+                  $ref: '#/definitions/domain.User'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Update Data User
+      tags:
+      - Admin - User
+  /admin/users/{id}/password:
+    put:
+      consumes:
+      - application/json
+      description: Admin mengubah kata sandi pengguna
+      parameters:
+      - description: UUID User
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Password Baru
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/domain.UpdateUserPasswordRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.SuccessResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Update Password User
+      tags:
+      - Admin - User
+  /auth/login:
+    post:
+      consumes:
+      - application/json
+      description: Autentikasi pengguna dan mendapatkan Access Token & Refresh Token
+      parameters:
+      - description: Kredensial Login
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/domain.LoginRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/response.SuccessResponse'
+            - properties:
+                data:
+                  $ref: '#/definitions/domain.LoginResponse'
+              type: object
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/response.ErrorResponse'
+      summary: Login
+      tags:
+      - Auth
+  /auth/refresh:
+    post:
+      consumes:
+      - application/json
+      description: Memperbarui Access Token menggunakan Refresh Token yang masih berlaku
+      parameters:
+      - description: Refresh Token
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/domain.RefreshRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/response.SuccessResponse'
+            - properties:
+                data:
+                  $ref: '#/definitions/domain.RefreshResponse'
+              type: object
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/response.ErrorResponse'
+      summary: Refresh Token
+      tags:
+      - Auth
+  /protected/auth/logout:
+    post:
+      description: Membatalkan sesi aktif dan menginvalidasi token
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.SuccessResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/response.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Logout
+      tags:
+      - Auth
+  /protected/exams/enroll:
+    post:
+      consumes:
+      - application/json
+      description: 'Peserta mendaftar ke suatu event ujian (status awal: pending)'
+      parameters:
+      - description: ID Event
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/domain.EnrollEventRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.SuccessResponse'
+      security:
+      - BearerAuth: []
+      summary: Daftar ke Event Ujian
+      tags:
+      - Peserta - Ujian
+  /protected/exams/my-exams:
+    get:
+      description: Peserta melihat daftar pendaftaran & nilai ujian miliknya
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/response.PaginatedResponse'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/domain.UserApproval'
+                  type: array
+              type: object
+      security:
+      - BearerAuth: []
+      summary: Riwayat Ujian Saya
+      tags:
+      - Peserta - Ujian
+  /protected/exams/upcoming:
+    get:
+      description: Peserta melihat event ujian yang belum berakhir
+      parameters:
+      - default: 1
+        description: Halaman
+        in: query
+        name: page
+        type: integer
+      - default: 10
+        description: Limit
+        in: query
+        name: limit
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/response.PaginatedResponse'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/domain.UpcomingEvent'
+                  type: array
+              type: object
+      security:
+      - BearerAuth: []
+      summary: Daftar Event Mendatang
+      tags:
+      - Peserta - Ujian
+securityDefinitions:
+  BearerAuth:
+    description: 'Masukkan token JWT dengan format: Bearer {token}'
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"
