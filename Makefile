@@ -1,4 +1,4 @@
-.PHONY: run stop build test swagger up down infra-up infra-down migrate-up migrate-down seed clear-seed reset-db sqlc docker-build
+.PHONY: run stop build test swagger up down dev infra-up infra-down migrate-up migrate-down seed clear-seed reset-db sqlc docker-build
 
 # Variabel Konfigurasi Database (Sesuaikan dengan .env)
 DB_URL="postgres://postgres:postgres@localhost:5432/pramukacat?sslmode=disable"
@@ -63,6 +63,12 @@ up:
 down:
 	@echo "Mematikan seluruh sistem Docker Compose..."
 	docker-compose down
+
+dev:
+	@echo "🚀 Menyalakan Backend (API) dan Infrastruktur di background..."
+	docker-compose up -d
+	@echo "⚡ Menjalankan Frontend Next.js di terminal ini (Tekan Ctrl+C untuk berhenti)..."
+	cd frontend && npm install && npm run dev
 
 # --- Infrastruktur Khusus ---
 infra-up:
