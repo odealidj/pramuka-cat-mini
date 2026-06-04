@@ -21,6 +21,10 @@ export default function RootLayout({
     <html lang="id" className="h-full antialiased">
       <body className="h-full">
         <AuthProvider>{children}</AuthProvider>
+        {/* Anti-Piracy Watermark: Tersembunyi dari layar namun terlihat jelas di Inspect Element (DOM) */}
+        <div style={{ display: "none" }} data-author="Aliube" data-license="Proprietary Non-Commercial">
+          Pramuka CAT is developed and owned by Aliube. Unauthorized commercial use is strictly prohibited.
+        </div>
       </body>
     </html>
   );
